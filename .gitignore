@@ -1,0 +1,37 @@
+# CMake build directory
+build/
+CMakeFiles
+CMakeCache.txt
+cmake_install.cmake
+
+# Visual Studio
+*.vs
+*.user
+*.suo
+*.sdf
+*.opensdf
+*.db
+*.opendb
+Debug/
+Release/
+x64/
+Win32/
+ipch/
+
+# CLion
+cmake-build-*/
+.idea/
+
+# Visual Studio Code
+.vscode/
+
+# Compiled object files
+*.o
+*.obj
+
+# Compiled executables
+*.exe
+*.out
+
+*.vcxproj*
+*.sln
