@@ -28,7 +28,7 @@ echo.
 
 :: Copy the executable to the project root
 echo Copying executable to project root...
-copy .\bin\Release\MechCommanderNoCDPatch.exe .\ || goto :copy_error
+copy .\bin\Release\MechCommanderNoCDPatch.exe ..\ || goto :copy_error
 echo.
 echo Release executable copied to project root.
 

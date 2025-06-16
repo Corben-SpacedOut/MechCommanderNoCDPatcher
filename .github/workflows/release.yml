@@ -1,0 +1,50 @@
+---
+name: Build and deploy
+on:
+  push:
+    branches:
+      - 'main'
+
+jobs:
+  build:
+    name: Build release
+    runs-on: windows-latest
+    steps:
+      - name: Checkout the repo
+        uses: actions/checkout@v4
+        with:
+          submodules: recursive
+      
+      - name: Build
+        run: cmd.exe /c 'build-release.bat'
+
+      - name: Upload
+        uses: actions/upload-artifact@v4
+        with:
+          name: MechCommanderNoCDPatcher
+          path: |
+            *.exe
+          retention-days: 15
+          if-no-files-found: error
+        
+  deploy:
+    name: Deploy release
+    runs-on: ubuntu-latest
+    needs: build
+    steps:
+      - name: Download artifacts
+        uses: actions/download-artifact@v4
+        with:
+          pattern: MechCommanderNoCDPatcher
+          path: |
+            *.exe
+          merge-multiple: true
+
+      - name: release
+        uses: crowbarmaster/GH-Automatic-Releases@latest
+        with:
+          repo_token: "${{ secrets.GITHUB_TOKEN }}"
+          automatic_release_tag: 'latest'
+          prerelease: true
+          files: |
+            *.exe
